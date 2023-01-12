@@ -34,14 +34,6 @@ def merge(lijst1, lijst2):
         index2 = index2 + 1
     return wombocombo_lijst 
 
-def is_mogelijk(opgaven, wiskundigen):
-    opgaven = sorteer(opgaven)
-    wiskundigen = sorteer(wiskundigen)
-
-    for k in range(len(opgaven)):
-        if opgaven[k] > wiskundigen[k] or opgaven[k] < wiskundigen[k] / 2:
-            return False
-    return True
 
 
     
