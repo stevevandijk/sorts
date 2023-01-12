@@ -1,7 +1,4 @@
 import random
-def heapsort(a):
-
-    return 
 
 def quicksort(k):
     if order(k) == 0:
