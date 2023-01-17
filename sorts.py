@@ -3,7 +3,7 @@ import random
 def quicksort(k):
     if order(k) == 0:
         return k
-    else:
+   else:
         b = len(k)
         c = random.randrange(0,b)
         d = k[c]
@@ -14,9 +14,10 @@ def quicksort(k):
                 right.append(i)
             else:
                 left.append(i)
+        left = quicksort(left)
+        right = quicksort(right)
         for i in right:
             left.append(i)
-        left = quicksort(left)
         return left
 def insertionsort(k):
     control = order(k)
