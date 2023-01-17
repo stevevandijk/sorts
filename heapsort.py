@@ -3,10 +3,10 @@ import numpy as np
 
 def heap_sort(arr):
     n = len(arr)
-    '''Hier wordt de zogenaamde max heap opgebouwd doormiddel van de heapify method'''
+    # Hier wordt de zogenaamde max heap opgebouwd doormiddel van de heapify method
     for i in range(n, -1, -1):
         heapify(arr, n, i)
-    '''Hier wordt er per element bekeken of die moet worden geswapped'''
+    # Hier wordt er per element bekeken of die moet worden geswapped
     for i in range(n - 1, 0, -1):
         arr[i], arr[0] = arr[0], arr[i]   # swap
         heapify(arr, i, 0)
