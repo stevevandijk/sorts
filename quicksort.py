@@ -19,22 +19,7 @@ def quicksort(k):
         for i in right:
             left.append(i)
         return left
-def insertionsort(k):
-    control = order(k)
-    place = 0
-    maxplace = len(k) -1
-    while control == 1:
-        place2 = place +1
-        left = k[place]
-        right = k[place2]
-        if left > right:
-            k[place] = right
-            k[place2] = left
-        place = place + 1
-        if place == maxplace:
-            place = 0
-        control = order(k)
-    return k
+
 def order(test_list):
     temp = 0
     i = 1
