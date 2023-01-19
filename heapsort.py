@@ -9,10 +9,10 @@ import numpy as np
 # aan de waarde van zijn child-nodes.
 # Om de array om te zetten naar zijn max-heap, ondergaat de array het heapify proces.
 # Het heapify proces vergelijkt de nodes met zijn child-nodes en indien er niet wordt voldaan aan de bovengenoemde
-# eigenschap, wordt de node omgewisselt met zijn de desbetreffende child-node.
+# eigenschap, wordt de node omgewisselt met zijn desbetreffende child-node.
 # Dit wordt gedaan totdat er niks meer hoeft worden omgewisselt.
-# Vervolgens worden het laatste en het eerste element laatste element van de max-heap omgewisselt en wordt proces
-# herhaalt voor alle elementen behalve het laatste gesorteerde (grootste) element aan het einde van de lijst.
+# Vervolgens worden het laatste en het eerste element element van de max-heap omgewisselt en wordt proces
+# herhaalt voor alle elementen uit de nieuwe behalve het laatste gesorteerde (grootste) element aan het einde van de lijst.
 
 def heap_sort(arr):
     n = len(arr)
