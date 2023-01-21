@@ -75,9 +75,12 @@ def validate_input(value: str) -> list:
 
 
 def main() -> None:
-    input_arr = input('input your list: ')
-    arr = validate_input(input_arr)
-    heap_sort(np.array(arr))
+    while True:
+        input_arr = input('input your list: ')
+        if input_arr == 'stop':
+            break
+        arr = validate_input(input_arr)
+        heap_sort(np.array(arr))
 
 
 if __name__ == '__main__':
