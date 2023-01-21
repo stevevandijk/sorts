@@ -6,55 +6,56 @@ DEBUG = True
 def heap_sort(arr) -> list:
     quantity = len(arr)
 
-    # Hier wordt achteruit gelooped door de elementen van de lijst, waarbij ini_parent de parent_idx wordt.
-    # Als het heapify proces is gedaan, staat het grootste element aan het begin van de array.
-    # (Het heapify proces zet een array om in zijn max-heap data-structuur)
+    # We loop through the array from back to front, where the initial max-heap data structure is created
+    # for all the elements, because all elements are unsorted.
+    # This is done with the heapify method.
+    # Once this initial max-heap is formed the second for loop starts.
 
     for ini_parent in range(quantity, -1, -1):
         heapify(arr, quantity, ini_parent)
 
-    # Nu de array is zijn max-heap staat wordt het eerste grootste element omgewisseld met het laatste element uit
-    # de array.
-    # Vervolgens wordt heapify weer aangeroepen, die vervolgens voor de overige ongesorteerde elementen
-    # hetzelfde proces herhaalt.
-    # Als dat is gedaan wordt het nogmaals herhaalt, totdat deze for loop alles heeft gesorteerd.
+    # The array has max-heap structure, therefore the biggest element is located at index = 0.
+    # Therefore, we swap the first element with the last element of the unsorted list, which is quantity - 1 at first.
+    # After the last and the first elements have been swapped de heapify method is called again, which
+    # creates the max-heap structure again for all elements except those which have already been sorted.
 
     for idx in range(quantity - 1, 0, -1):
         arr[idx], arr[0] = arr[0], arr[idx]
         heapify(arr, idx, 0)
 
-    # print('Your sorted list:')
+    print('Your sorted list:')
     print(arr)
     return arr
 
 
 def heapify(arr: list, quantity: int, ini_parent: int) -> None:
 
-    # Parent is de index van de parent-node, left_idx is de index van de left child-node en right_idx
-    # is de index van right child_node.
+    # Initially,
+    # parent_idx is the index of the initial parent node.
+    # left_idx is the index of the left child node of the initial parent node.
+    # right_idx is the index of the right child node of the initial parent node.
 
     parent_idx = ini_parent
     left_idx = 2 * ini_parent + 1
     right_idx = 2 * ini_parent + 2
 
-    # Hier wordt gecheckt of de left child-node groter is dan de parent-node.
-    # Zo ja dan wordt de nieuwe parent index, de index van de left child-node.
-    # Ook wordt er gechekt of de index van de left child-node kleiner dan de hoogst mogelijk indexgetal van
-    # de array, namelijk quantity.
+    # This if-statement checks if the parent node is less than the left child node.
+    # If this is the case the index of the parent node becomes the index of the left child node.
+    # The if-statement also checks if the left child even exists, by checking if left_idx is less than quantity.
 
     if left_idx < quantity and arr[ini_parent] < arr[left_idx]:
         parent_idx = left_idx
 
-    # Dezelfde check wordt gedaan voor de right child-node. Echter kan het nu zo zijn dat de left child-node de
-    # nieuwe parent-node is geworden, dus daarom arr[parent] in plaats van arr[index].
+    # The same if-statement for the right child node, but because the initial parent might have been replaced by
+    # the left_child node, we input parent_idx instead of ini_parent.
+    # The index of the new parent becomes the index of the right child node if this if-statement is true.
 
     if right_idx < quantity and arr[parent_idx] < arr[right_idx]:
         parent_idx = right_idx
 
-    # Hier wordt er gecheckt of de parent-node is veranderd.
-    # Als dat zo is wordt de nieuwe parent-node, de rechter of de linker child-node afhankelijk van welke
-    # de nieuwe parent-node is geworden.
-    # Daarna roept de functie zichzelf weer aan, maar is de nieuwe ini_parent, parent_idx.
+    # This if-statement checks if the index of the parent node has changed.
+    # If so the initial parent node is swapped with the new the left or right child not, depending on which is largest.
+    # Then the function calls itself with the new parent as the initial parent.
 
     if parent_idx != ini_parent:
         arr[ini_parent], arr[parent_idx] = arr[parent_idx], arr[ini_parent]
