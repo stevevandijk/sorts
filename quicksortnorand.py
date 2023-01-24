@@ -3,7 +3,7 @@ def quicksortnorand(lista):
         return lista      
     else:
         length = len(lista)
-        rotationpoint = lista[0]
+        rotationpoint = lista[1]
         left = []
         right = []
         for i in lista: #here we start using the rotation variable, if something is lower it will go to the left and if its higher it will go to the right.
