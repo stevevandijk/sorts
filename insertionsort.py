@@ -1,27 +1,62 @@
-def insertionsort(lista):
-    control = order(lista) #our control value will be used to see if the list is sorted yet
-    place = 0 #place will be our current location in the list
-    maxplace = len(lista) -1
-    while control == 1: #control is determined by order() if order() is 1 that means the list is not ordered and therefore we should keep sorting
-        place2 = place +1 #place2 will be the location of the value we will be comparing place to.
-        left = lista[place] #value at place
-        right = lista[place2] #value at place2
-        if left > right: #if the left value has a bigger value then the right value they switch places
-            lista[place] = right
-            lista[place2] = left
-        place = place + 1 #after switching me move up in the list
-        if place == maxplace: #if we reach the right side of the list we go back to the start
-            place = 0
-        control = order(lista)
-    return lista
-def order(test_list):
-    temp = 0
-    i = 1
-    while i < len(test_list):
-        if(test_list[i] < test_list[i - 1]):
-            temp = 1
-        i += 1
-    if (temp == 0) :
-        return temp
-    else :
-        return temp
+import numpy as np
+
+DEBUG = True
+
+
+def insertion_sort(arr):
+
+    quantity = len(arr)
+
+    # Here we loop through all indexes of the array
+
+    for idx in range(1, quantity):
+
+        # We define a variable which is the index of the predecessor of arr[idx]
+        # We define another variable, key, which is the element at index idx
+
+        predec_idx = idx - 1
+        key = arr[idx]
+
+        # This while loop stays true if the predecessor is smaller than the key we are looking at
+        # while the loop is true, the predecessor gets swapped with the next element in the array
+        # The index of the predecessor is now one element to the left, since the key is now swapped with its
+        # predecessor
+        # If the index of the predecessor is less than zero we have checked for all elements before the key-element
+        # thus the while loop ends, and we check for the next key-element
+
+        while predec_idx >= 0 and key < arr[predec_idx]:
+            arr[predec_idx + 1] = arr[predec_idx]
+            predec_idx -= 1
+
+        # Here we change our key back to what it was originally, because we didn't swap, but changed the value
+
+        arr[predec_idx + 1] = key
+
+    print('your sorted list: ')
+    print(arr)
+    return arr
+
+
+def validate_input(value: str) -> list:
+    items = value.split(' ')
+    ret = []
+    for item in items:
+        try:
+            ret.append(int(item))
+        except ValueError:
+            if DEBUG:
+                print("Invalid value [{}] ignoring...".format(item))
+    return ret
+
+
+def main() -> None:
+    while True:
+        input_arr = input('input your list, separate the elements of the list with spaces: ')
+        if input_arr == 'stop':
+            break
+        arr = validate_input(input_arr)
+        insertion_sort(np.array(arr))
+
+
+if __name__ == '__main__':
+    main()
