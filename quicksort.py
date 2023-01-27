@@ -1,33 +1,84 @@
-import random
+import numpy as np
 
-def quicksort(lista):
-    if order(lista) == 0: #order() returns 0 if the list is sorted so if order() returns 0 then you just return the list
-        return lista      
-   else:
-        length = len(lista)
-        randomplace = random.randrange(0,length) #here we take a random place in the list which will give use the variable at that place. We will use this variable to sort the list around.
-        rotationpoint = lista[randomplace]
-        left = []
-        right = []
-        for i in lista: #here we start using the rotation variable, if something is lower it will go to the left and if its higher it will go to the right.
-            if i > rotationpoint:
-                right.append(i)
-            else:
-                left.append(i)
-        left = quicksort(left) #we sort the left again until its sorted
-        right = quicksort(right) #we sort the right again until its sorted
-        for i in right:
-            left.append(i) #we add the right to the left 
-        return left #and return a sorted list
+DEBUG = True
 
-def order(test_list):
-    temp = 0
-    i = 1
-    while i < len(test_list):
-        if(test_list[i] < test_list[i - 1]):
-            temp = 1
-        i += 1
-    if (temp == 0) :
-        return temp
-    else :
-        return temp
+
+def quicksort(arr, lower, upper):
+
+    if lower < upper:
+
+        # We find the pivot element such that
+        # the element smaller than the pivot element are on the left and
+        # the element greater than the pivot element are on the right
+
+        pivot_num = partition(arr, lower, upper)
+
+        # Here quicksort calls itself on the left of the pivot
+
+        quicksort(arr, lower, pivot_num - 1)
+
+        # Here quicksort calls itself on the right of the pivot
+
+        quicksort(arr, pivot_num + 1, upper)
+
+    return arr
+
+
+def partition(arr, lower, upper):
+
+    # Here you choose the pivot element to be the rightmost element.
+
+    pivot = arr[upper]
+
+    # Pointer for the greater element
+
+    n = lower - 1
+
+    # Here we compare all elements with the pivot element
+
+    for k in range(lower, upper):
+        if arr[k] <= pivot:
+
+            # If an element is smaller or equal to the pivot element
+            # it gets swapped with the greater element pointed to by n
+
+            n += 1
+
+            # So that mean the k-th element gets swapped with the n-th element
+
+            arr[n], arr[k] = arr[k], arr[n]
+
+    # Here we swap the pivot element with the greater element pointed to by n
+
+    arr[n + 1], arr[upper] = arr[upper], arr[n + 1]
+
+    # And lastly return the position form where the separation is done
+
+    return n + 1
+
+
+def validate_input(value: str) -> list:
+    items = value.split(' ')
+    ret = []
+    for item in items:
+        try:
+            ret.append(int(item))
+        except ValueError:
+            if DEBUG:
+                print("Invalid value [{}] ignoring...".format(item))
+    return ret
+
+
+def main():
+    while True:
+        input_arr = input('input your list, separate the elements of the list with spaces: ')
+        if input_arr == 'stop':
+            break
+        arr = validate_input(input_arr)
+        print('your sorted list: ')
+        print(quicksort(np.array(arr), 0, len(arr) - 1))
+
+
+if __name__ == '__main__':
+    quicksort([8, 3, 4, 2, 5], 0, 4)
+    main()
