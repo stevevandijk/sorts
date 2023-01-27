@@ -80,5 +80,4 @@ def main():
 
 
 if __name__ == '__main__':
-    quicksort([8, 3, 4, 2, 5], 0, 4)
     main()
