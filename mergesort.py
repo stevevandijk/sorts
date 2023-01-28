@@ -1,41 +1,68 @@
-def sorteer(gesorteerde_lijst):
-    if len(gesorteerde_lijst) <= 1:
-        return gesorteerde_lijst
-    
-    m = len(gesorteerde_lijst) // 2
-    l = gesorteerde_lijst [:m]
-    r = gesorteerde_lijst [m:]
+import numpy as np
 
-    l = sorteer(l)
-    r = sorteer(r)
-    return merge(l, r)
+DEBUG = True
 
-def merge(lijst1, lijst2):
-    wombocombo_lijst = []
-    index1 = 0
-    index2 = 0
-    lengte1 = len(lijst1)
-    lengte2 = len(lijst2)
 
-    while index1 < lengte1 and index2 < lengte2:
+def merge_sort(arr):
 
-        if lijst1[index1] <= lijst2[index2]:
-            wombocombo_lijst.append(lijst1[index1])
-            index1 = index1 + 1
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left_arr = arr[:mid]
+    right_arr = arr[mid:]
+
+    left_arr = merge_sort(left_arr)
+    right_arr = merge_sort(right_arr)
+
+    return merge(left_arr, right_arr)
+
+
+def merge(left, right):
+
+    sorted_arr = []
+    left_idx, right_idx = 0, 0
+    length_left, length_right = len(left), len(right)
+
+    while left_idx < length_left and right_idx < length_right:
+        if left[left_idx] <= right[right_idx]:
+            sorted_arr.append(left[left_idx])
+            left_idx += 1
         else:
-            wombocombo_lijst.append(lijst2[index2])
-            index2 = index2 + 1
+            sorted_arr.append(right[right_idx])
+            right_idx += 1
 
-    while index1 < lengte1:
-        wombocombo_lijst.append(lijst1[index1])
-        index1 = index1 + 1
-    while index2 < lengte2:
-        wombocombo_lijst.append(lijst2[index2])
-        index2 = index2 + 1
-    return wombocombo_lijst 
+    while left_idx < length_left:
+        sorted_arr.append(left[left_idx])
+        left_idx += 1
+    while right_idx < length_right:
+        sorted_arr.append(right[right_idx])
+        right_idx += 1
 
-
-
-    
+    return sorted_arr
 
 
+def validate_input(value: str) -> list:
+    items = value.split(' ')
+    ret = []
+    for item in items:
+        try:
+            ret.append(int(item))
+        except ValueError:
+            if DEBUG:
+                print("Invalid value [{}] ignoring...".format(item))
+    return ret
+
+
+def main():
+    while True:
+        input_arr = input('input your list, separate the elements of the list with spaces: ')
+        if input_arr == 'stop':
+            break
+        arr = validate_input(input_arr)
+        print('your sorted array: ')
+        print(merge_sort(np.array(arr)))
+
+
+if __name__ == '__main__':
+    main()
