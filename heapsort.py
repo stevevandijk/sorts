@@ -23,8 +23,6 @@ def heap_sort(arr) -> list:
         arr[idx], arr[0] = arr[0], arr[idx]
         heapify(arr, idx, 0)
 
-    print('Your sorted list:')
-    print(arr)
     return arr
 
 
@@ -76,11 +74,12 @@ def validate_input(value: str) -> list:
 
 def main() -> None:
     while True:
-        input_arr = input('input your list: ')
+        input_arr = input('input your list, separate the elements of the list with spaces: ')
         if input_arr == 'stop':
             break
         arr = validate_input(input_arr)
-        heap_sort(np.array(arr))
+        print('Your sorted list:')
+        print(heap_sort(np.array(arr)))
 
 
 if __name__ == '__main__':
