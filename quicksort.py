@@ -2,6 +2,7 @@ import numpy as np
 
 DEBUG = True
 
+"""Input your list and quicskort sorts your list!"""
 
 def quicksort(arr, lower, upper):
 
