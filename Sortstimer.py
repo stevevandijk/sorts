@@ -5,6 +5,9 @@ import numpy as np
 
 DEBUG = True
 
+"""This is the sorts timer. It's a class with all the sorts and a timer function to time how long it takes for the sorting algorithms to sort the list
+the user inputs!"""
+
 # This function is used to time the algorithms
 
 
