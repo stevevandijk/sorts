@@ -2,6 +2,7 @@ import numpy as np
 
 DEBUG = True
 
+"""Input your list and heapsort sorts your list!"""
 
 def heap_sort(arr) -> list:
     quantity = len(arr)
