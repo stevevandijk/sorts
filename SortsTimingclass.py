@@ -5,18 +5,23 @@ import numpy as np
 
 DEBUG = True
 
+# This function is used to time the algorithms
+
 
 def timed(func):
     def wrapper_function(*args, **kwargs):
         start = timer()
         func(*args, **kwargs)
-        print("Timed:", timer() - start)
+        print("Timed:", (timer() - start) * 1000, "ms")
 
     return wrapper_function
 
+# If the list that is being input is too long for display, this method shrinks the list in the following way
+# [1, 2, 3, 4, ... , 97, 98, 99, 100]
+
 
 def list_for_printing(arr):
-    if len(arr) > 10:
+    if len(arr) > 20:
         left = arr[0:4]
         right = arr[-4:]
 
@@ -39,8 +44,10 @@ class Sorts(object):
         self.qs_upper: int = len(self.arr) - 1
 
     def __repr__(self) -> str:
-        return "Sorts[\n   original: %s,\n     sorted: %s\n]" % (list_for_printing(self.orig_arr), list_for_printing(self.arr))
+        return "Sorts[\n   original: %s,\n     sorted: %s\n]" % (
+            list_for_printing(self.orig_arr), list_for_printing(self.arr))
 
+    # resets the input list to its original input
     def reset(self) -> None:
         self.arr = copy(self.orig_arr)
 
@@ -151,7 +158,7 @@ class Sorts(object):
 
 
 def validate_input(value: str) -> list:
-    items = re.split(r"[,;\s]+", value)
+    items = re.split(r"[,\s]+", value)
     ret = []
     for item in items:
         try:
@@ -164,7 +171,7 @@ def validate_input(value: str) -> list:
 
 def main() -> None:
     while True:
-        input_arr = input('input your list, separate the elements of the list with spaces: ')
+        input_arr = input('input your list, separate the elements of the list with spaces, commas or: ')
         if input_arr == 'stop':
             break
         arr = validate_input(input_arr)
