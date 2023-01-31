@@ -2,6 +2,7 @@ import numpy as np
 
 DEBUG = True
 
+"""Input your list and merge sort sorts your list!"""
 
 def merge_sort(arr):
 
