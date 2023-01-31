@@ -2,6 +2,7 @@ import numpy as np
 
 DEBUG = True
 
+"""Input your list and insertion sort sorts your list!"""
 
 def insertion_sort(arr):
 
